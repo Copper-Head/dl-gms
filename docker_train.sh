@@ -2,7 +2,7 @@
 set -e
 
 # Loads relevant variables from config file
-source $(grep = config.ini)
+source <(grep = config.ini)
 
 NV_GPU=$GPUs nvidia-docker run -d \
           --name=$name \
