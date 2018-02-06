@@ -73,9 +73,10 @@ with tf.name_scope('vae_loss'):
 train_step = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(vae_loss)
 
 saver = tf.train.Saver(max_to_keep=None)
-tb_path = partial(os.path.join, TB_LOGDIR, RUN_NAME)
+tb_path = os.path.join(TB_LOGDIR, RUN_NAME, 'training')
+os.makedirs(tb_path, exist_ok=True)
 with tf.Session() as s, \
-    tf.summary.FileWriter(tb_path('training'), s.graph) as main_writer, \
+    tf.summary.FileWriter(tb_path, s.graph) as main_writer, \
     h5py.File(os.path.join(DATA_DIR, 'noisy_real.h5')) as data_f:
 
     # Data
