@@ -10,7 +10,7 @@ NV_GPU=$GPUs nvidia-docker run -d \
           -v /srv/data/lgm2017-lego:$data_dir \
           -v $(pwd):/scripts \
           -v /srv/data/lgm2017-lego/weights:$weights_dir \
-          -v /srv/data/lgm2017-lego/tensorboard-logdir:$tensorboard_logdir \
+          -v /srv/data/lgm2017-lego/tensorboard-logdir:$tb_logdir \
           mlcog-up/tf-keras-trainer train.py
 
 docker logs $name -f
