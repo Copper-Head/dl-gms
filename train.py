@@ -73,8 +73,9 @@ with tf.name_scope('vae_loss'):
 train_step = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(vae_loss)
 
 saver = tf.train.Saver(max_to_keep=None)
-tb_path = os.path.join(TB_LOGDIR, RUN_NAME, 'training')
-os.makedirs(tb_path, exist_ok=True)
+tb_path = os.path.join(TB_LOGDIR, RUN_NAME)
+weights_path = os.path.join(config['paths']['weights_dir'], RUN_NAME)
+os.makedirs(weights_path, exist_ok=True)
 with tf.Session() as s, \
     tf.summary.FileWriter(tb_path, s.graph) as main_writer, \
     h5py.File(os.path.join(DATA_DIR, 'noisy_real.h5')) as data_f:
@@ -113,9 +114,7 @@ with tf.Session() as s, \
         epoch_loss = np.mean(losses)
         if epoch_loss < min_train_loss:
             print('Saving model params!')
-            saver.save(s,
-                       os.path.join(config['paths']['weights_dir'], RUN_NAME, '{:03d}--{:f}'.format(
-                           epoch, epoch_loss)))
+            saver.save(s, os.path.join(weights_path, '{:03d}--{:f}'.format(epoch, epoch_loss)))
             min_train_loss = epoch_loss
         # generate images for last epoch
         if epoch + 1 == N_EPOCHS:
