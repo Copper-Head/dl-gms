@@ -20,14 +20,14 @@ img_dim = 64
 img_channels = 3
 img_shape = (img_dim, img_dim, img_channels)
 original_dim = np.product(img_shape)
-intermediate_dim = 100
-latent_dim = 3
+intermediate_dim = 64
+latent_dim = 2
 
-BATCH_SIZE = 100
-N_EPOCHS = 1000
-STEPS_PER_EPOCH = 25
+BATCH_SIZE = 1
+N_EPOCHS = 300
+STEPS_PER_EPOCH = 1
 LEARNING_RATE = 1e-4
-MAX_IMAGES = 9
+MAX_IMAGES = 1
 
 # for the reparametrization trick.
 epsilon_std = 1.
@@ -78,11 +78,11 @@ weights_path = os.path.join(config['paths']['weights_dir'], RUN_NAME)
 os.makedirs(weights_path, exist_ok=True)
 with tf.Session() as s, \
     tf.summary.FileWriter(tb_path, s.graph) as main_writer, \
-    h5py.File(os.path.join(DATA_DIR, 'noisy_real.h5')) as data_f:
+    h5py.File(os.path.join(DATA_DIR, 'legos.h5')) as data_f:
 
     # Data
-    data = tf.data.Dataset.from_tensor_slices(data_f['images'])
-    iterator = data.map(lambda im: im / 255).batch(100).repeat().make_one_shot_iterator()
+    data = tf.data.Dataset.from_tensor_slices(data_f['images'][:1])
+    iterator = data.map(lambda im: im / 255).batch(BATCH_SIZE).repeat().make_one_shot_iterator()
     next_batch = iterator.get_next()
 
     # TB Summaries
