@@ -62,13 +62,11 @@ x_decoded = x_reshape(x_flat_decoded)
 
 # Losses & Optimization
 with tf.name_scope('kl_loss'):
-    kl_loss = tf.reduce_mean(
-        -0.5 * tf.reduce_mean(1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var), axis=-1),
-        name='kl_loss')
+    kl_loss = -0.5 * tf.reduce_mean(1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var), axis=-1),
 with tf.name_scope('rec_loss'):
     rec_loss = tf.reduce_mean(tf.reduce_sum((x - x_decoded)**2, axis=-1), name="rec_loss")
 with tf.name_scope('vae_loss'):
-    vae_loss = kl_loss + rec_loss
+    vae_loss = tf.reduce_mean(kl_loss + rec_loss)
 
 train_step = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(vae_loss)
 
