@@ -24,10 +24,10 @@ intermediate_dim = 64
 latent_dim = 2
 
 BATCH_SIZE = 100
-N_EPOCHS = 3
-STEPS_PER_EPOCH = 1
+N_EPOCHS = 1000
+STEPS_PER_EPOCH = 25
 LEARNING_RATE = 1e-4
-MAX_IMAGES = 10
+MAX_IMAGES = 9
 
 # for the reparametrization trick.
 epsilon_std = 1.
