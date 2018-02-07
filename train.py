@@ -20,8 +20,8 @@ img_dim = 64
 img_channels = 3
 img_shape = (img_dim, img_dim, img_channels)
 original_dim = np.product(img_shape)
-intermediate_dim = 64
-latent_dim = 2
+intermediate_dim = 100
+latent_dim = 3
 
 BATCH_SIZE = 100
 N_EPOCHS = 1000
