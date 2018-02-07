@@ -23,7 +23,7 @@ original_dim = np.product(img_shape)
 intermediate_dim = 64
 latent_dim = 2
 
-BATCH_SIZE = 1
+BATCH_SIZE = 5
 N_EPOCHS = 1000
 STEPS_PER_EPOCH = 1
 LEARNING_RATE = 1e-4
