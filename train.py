@@ -81,7 +81,7 @@ with tf.Session() as s, \
     h5py.File(os.path.join(DATA_DIR, 'legos.h5')) as data_f:
 
     # Data
-    data = tf.data.Dataset.from_tensor_slices(data_f['images'][:1])
+    data = tf.data.Dataset.from_tensor_slices(data_f['images'])
     iterator = data.map(lambda im: im / 255).batch(BATCH_SIZE).repeat().make_one_shot_iterator()
     next_batch = iterator.get_next()
 
