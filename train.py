@@ -24,7 +24,7 @@ intermediate_dim = 64
 latent_dim = 2
 
 BATCH_SIZE = 1
-N_EPOCHS = 300
+N_EPOCHS = 1000
 STEPS_PER_EPOCH = 1
 LEARNING_RATE = 1e-4
 MAX_IMAGES = 1
