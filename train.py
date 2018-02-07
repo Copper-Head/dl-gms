@@ -20,14 +20,14 @@ img_dim = 64
 img_channels = 3
 img_shape = (img_dim, img_dim, img_channels)
 original_dim = np.product(img_shape)
-intermediate_dim = 64
+intermediate_dim = 128
 latent_dim = 2
 
-BATCH_SIZE = 5
+BATCH_SIZE = 9
 N_EPOCHS = 1000
 STEPS_PER_EPOCH = 1
 LEARNING_RATE = 1e-4
-MAX_IMAGES = 5
+MAX_IMAGES = 9
 
 # for the reparametrization trick.
 epsilon_std = 1.
